@@ -5,14 +5,14 @@ import f90nml
 
 rule UPDATE_NAMELIST_WRF:
     input:
-        Path(workflow.workdir_init) / "resources" / "namelist.input",
+        Path(workflow.workdir_init) / "resources" / "namelist.input"
     output:
         "{experiment}/namelist.input",
     run:
         num_land_cat = config["experiments"][wildcards.experiment]["num_land_cat"]
         use_wudapt_lcz = config["experiments"][wildcards.experiment]["use_wudapt_lcz"]
 
-        nml_input = f90nml.read(input)
+        nml_input = f90nml.read(str(input))
         nml_input["physics"]["num_land_cat"] = num_land_cat
         nml_input["physics"]["use_wudapt_lcz"] = 1 if use_wudapt_lcz else 0
 

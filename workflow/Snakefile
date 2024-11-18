@@ -8,10 +8,14 @@ envvars:
     "NETCDF",
 
 
+include: "rules/install.smk"
 include: "rules/wps.smk"
 include: "rules/wrf.smk"
 include: "rules/analysis.smk"
 
+
+rule run_wur:
+    input: "wur/finished.wrf"
 
 rule run_wps:
     input:
@@ -29,6 +33,12 @@ rule run_wrf:
     input:
         collect("{experiment}/finished.wrf", experiment=config["experiments"].keys()),
 
+
 rule reproduce_results:
     input:
         "logs/notebooks/analyse_output.ipynb"
+
+
+rule compile_wrf_gnu:
+    input:
+        collect("WRF/install/latest/gnu/{parallel_opt}/run/wrf", parallel_opt=["serial", "dm", "sm", "hybrid"])
