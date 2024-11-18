@@ -26,7 +26,7 @@ rule COMPILE_WRF_LATEST:
 
         # build dir must be flat because of `cd ..` in ./configure_new
         # install dir may be nested and is relative to build dir
-        ./configure_new -p GNU -d {params.build_dir} -i ../install/latest/gnu/{wildcards.parallel_opt} -x -- {params.parallel}
+        ./configure_new -p GNU -d {params.build_dir} -i ../install/latest/gnu/{wildcards.parallel_opt} -x -- {params.parallel} -DWRF_NESTING=BASIC
         
         # Run compilation on a staging node but interactively so snakemake can wait for it to complete. 
         srun -p staging -n 1 -t 1:00:00 --pty ./compile_new {params.build_dir} -j 1
