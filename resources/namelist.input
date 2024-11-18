@@ -78,7 +78,7 @@
     maxens2                             = 3,
     maxens3                             = 16,
     ensdim                              = 144,
-    sf_urban_physics                    = 1,     1,     1,    0,
+    sf_urban_physics                    = 1,     1,     1,    1,
     topo_wind                           = 0,
 
 /
