@@ -21,7 +21,7 @@ rule COMPILE_WRF_LATEST:
     shell: 
         """
         cd WRF
-        git checkout master
+        git checkout building-height-fix
         git pull
 
         # build dir must be flat because of `cd ..` in ./configure_new
